@@ -2,17 +2,17 @@
   "name": "grunt-font-optimizer",
   "description": "Optimize TTF fonts with Grunt",
   "version": "0.1.0",
-  "homepage": "-",
+  "homepage": "https://github.com/ActivearkJWT/grunt-font-optimizer/",
   "author": {
     "name": "Jesse Luoto / Activeark JWT",
     "email": "jesse.luoto@activearkjwt.com"
   },
   "repository": {
     "type": "git",
-    "url": "-"
+    "url": "https://github.com/ActivearkJWT/grunt-font-optimizer/"
   },
   "bugs": {
-    "url": "-"
+    "url": "https://github.com/ActivearkJWT/grunt-font-optimizer/issues"
   },
   "licenses": [
     {
