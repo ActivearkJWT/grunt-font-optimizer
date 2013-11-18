@@ -65,7 +65,7 @@ module.exports = function(grunt) {
                 var destination = relativeDestnation;
                 if(f.dest.substr("-1") === "/") {
                     // Add basepath of filename to destination path
-                    destination += filepath.replace(/^.*\//g, '');
+                    destination += "/" + filepath.replace(/^.*\//g, '');
                 }
                 
                 // build execution command
