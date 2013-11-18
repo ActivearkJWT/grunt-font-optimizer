@@ -51,10 +51,10 @@ module.exports = function(grunt) {
             
             // Subset.pl works only when run on correct folder,
             // so let's fix the paths.
-            shell.cd(process.cwd() + "/lib/font-optimizer/");
-            var relativeDestnation = "../../" + f.dest;
+            shell.cd(__dirname + "/../lib/font-optimizer/");
+            var relativeDestnation = process.cwd() + f.dest;
             var relativeSources = f.src.map(function(filepath) {
-                return "../../" + filepath;
+                return process.cwd() + filepath;
             });
             
             
