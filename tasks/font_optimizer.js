@@ -52,9 +52,9 @@ module.exports = function(grunt) {
             // Subset.pl works only when run on correct folder,
             // so let's fix the paths.
             shell.cd(__dirname + "/../lib/font-optimizer/");
-            var relativeDestnation = process.cwd() + f.dest;
+            var relativeDestnation = grunt.file.findup(f.dest);
             var relativeSources = f.src.map(function(filepath) {
-                return process.cwd() + filepath;
+                return grunt.file.findup(filepath);
             });
             
             
@@ -63,7 +63,7 @@ module.exports = function(grunt) {
                 
                 // Allow destination to be folder
                 var destination = relativeDestnation;
-                if(destination.substr("-1") === "/") {
+                if(f.dest.substr("-1") === "/") {
                     // Add basepath of filename to destination path
                     destination += filepath.replace(/^.*\//g, '');
                 }
@@ -81,7 +81,7 @@ module.exports = function(grunt) {
                 cmd = cmd.join(" ");
                 
                 // Debug message
-                grunt.log.write('Creating file "' + destination.substr(6) + '"... ');
+                grunt.log.write('Creating file "' + destination + '"... ');
                 
                 var result = shell.exec(cmd, {silent: true});
                 if(result.code !== 0) {
