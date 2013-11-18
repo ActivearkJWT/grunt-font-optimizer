@@ -83,10 +83,7 @@ In That case, describe a folder (ending with `/`) as the target:
 ```js
 grunt.initConfig({
   font_optimizer: {
-    options: {
-      separator: ': ',
-      punctuation: ' !!!',
-    },
+    options: {},
     files: {
       'optimized-fonts/': ['fonts/*.ttf'],
     },
