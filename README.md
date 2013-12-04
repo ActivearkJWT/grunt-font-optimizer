@@ -25,15 +25,17 @@ In your project's Gruntfile, add a section named `font_optimizer` to the data ob
 ```js
 grunt.initConfig({
   font_optimizer: {
-    options: {
+    default {
+      options: {
         // Characters to include
         chars: '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz',
         
         // Features to include.
         includeFeatures: ['kern']
-    },
-    your_target: {
+      },
+      files: {
         'fonts/font-optimized.ttf': ['fonts/font.ttf'],
+      },
     },
   },
 })
@@ -67,10 +69,12 @@ Default behaviour is to add each font as it's own row to the `option.files`
 ```js
 grunt.initConfig({
   font_optimizer: {
-    options: {},
-    files: {
-      'fonts/font-optimized.ttf': ['fonts/font.ttf'],
-      'fonts/font2-optimized.ttf': ['fonts/font2.ttf'],
+    default {
+      options: {},
+      files: {
+        'fonts/font-optimized.ttf': ['fonts/font.ttf'],
+        'fonts/font2-optimized.ttf': ['fonts/font2.ttf'],
+      },
     },
   },
 })
@@ -83,9 +87,11 @@ In That case, describe a folder (ending with `/`) as the target:
 ```js
 grunt.initConfig({
   font_optimizer: {
-    options: {},
-    files: {
-      'optimized-fonts/': ['fonts/*.ttf'],
+    default {
+      options: {},
+      files: {
+        'optimized-fonts/': ['fonts/*.ttf'],
+      },
     },
   },
 })
