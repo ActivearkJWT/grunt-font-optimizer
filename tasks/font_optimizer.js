@@ -9,11 +9,13 @@
 'use strict';
 
 module.exports = function(grunt) {
-  
+    // Init ShellJS
+    var shell = require('shelljs');
+    var path = require('path');
+    var util = require('util');
+    
     grunt.registerMultiTask('font_optimizer', 'Optimize TTF fonts with Grunt', function() {
         
-        // Init ShellJS
-        var shell = require('shelljs');
         
         // Merge task-specific and/or target-specific options with these defaults.
         var options = this.options({
@@ -51,37 +53,44 @@ module.exports = function(grunt) {
             
             // Subset.pl works only when run on correct folder,
             // so let's fix the paths.
-            shell.cd(__dirname + "/../lib/font-optimizer/");
-            var relativeDestnation = grunt.file.findup(f.dest);
-            var relativeSources = f.src.map(function(filepath) {
-                return grunt.file.findup(filepath);
+            var absoluteDestination = path.resolve(f.dest);
+            var paths = f.src.map(function(filepath) {
+                return {
+                    'absolute': path.resolve(filepath),
+                    'relative': filepath
+                };
             });
+            // Save old path so we can cwd back into it
+            var oldCwd = path.resolve(".");
+            shell.cd(__dirname + "/../lib/font-optimizer/");
             
             
-            relativeSources.forEach(function(filepath) {
-                
+            paths.forEach(function(path) {
                 
                 // Allow destination to be folder
-                var destination = relativeDestnation;
-                if(f.dest.substr("-1") === "/") {
+                var destination = absoluteDestination;
+                var relativeDestination = f.dest;
+                
+                if(grunt.file.isDir(absoluteDestination)) {
                     // Add basepath of filename to destination path
-                    destination += "/" + filepath.replace(/^.*\//g, '');
+                    destination += "/" + path.relative.replace(/^.*\//, '');
+                    relativeDestination += "/" + path.relative.replace(/^.*\//, '');
                 }
                 
                 // build execution command
                 var cmd = [];
                 cmd.push("perl -X ./subset.pl"); // Main executable
-                cmd.push('--chars="' + options.chars + '"'); // Included characters
+                cmd.push(util.format('--chars="%s"', options.chars.replace('"', '\\"'))); // Included characters
                 if(options.includeFeatures && options.includeFeatures.length !== 0) {
                     // Included font features
                     cmd.push("--include=" + options.includeFeatures.join(","));
                 }
-                cmd.push(filepath);
+                cmd.push(path.absolute);
                 cmd.push(destination);
                 cmd = cmd.join(" ");
                 
                 // Debug message
-                grunt.log.write('Creating file "' + destination + '"... ');
+                grunt.log.write('Creating file "' + relativeDestination + '"... ');
                 
                 var result = shell.exec(cmd, {silent: true});
                 if(result.code !== 0) {
@@ -94,6 +103,8 @@ module.exports = function(grunt) {
                 }
                 
             });
+
+            shell.cd(oldCwd);
             
             return f;
         });

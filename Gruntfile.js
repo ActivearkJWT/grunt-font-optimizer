@@ -24,13 +24,20 @@ module.exports = function(grunt) {
 
     // Configuration to be run (and then tested).
     font_optimizer: {
-      default_options: {
+      grouped: {
         options: {
         },
         files: {
           'optimized/': ['fonts/*.ttf'],
         },
-      }
+      },
+      single: {
+        options: {
+        },
+        files: {
+          'optimized/single.test.ttf': ['fonts/font.ttf'],
+        },
+      },
     }
 
   });
@@ -40,14 +47,8 @@ module.exports = function(grunt) {
 
   // These plugins provide necessary tasks.
   grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-nodeunit');
 
-  // Whenever the "test" task is run, first clean the "tmp" dir, then run this
-  // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['font_optimizer']);
-
-  // By default, lint and run all tests.
+  // By default
   grunt.registerTask('default', ['jshint', 'font_optimizer']);
 
 };
