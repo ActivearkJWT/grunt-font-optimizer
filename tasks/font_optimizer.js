@@ -85,8 +85,8 @@ module.exports = function(grunt) {
                     // Included font features
                     cmd.push("--include=" + options.includeFeatures.join(","));
                 }
-                cmd.push(path.absolute);
-                cmd.push(destination);
+                cmd.push('"' + path.absolute + '"');
+                cmd.push('"' + destination + '"');
                 cmd = cmd.join(" ");
                 
                 // Debug message
