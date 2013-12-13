@@ -80,7 +80,7 @@ module.exports = function(grunt) {
                 // build execution command
                 var cmd = [];
                 cmd.push("perl -X ./subset.pl"); // Main executable
-                cmd.push(util.format('--chars="%s"', options.chars.replace('"', '\\"'))); // Included characters
+                cmd.push(util.format('--chars="%s"', options.chars.replace(/([^\w])/g, function(r) { return "\\"+r; }))); // Included characters
                 if(options.includeFeatures && options.includeFeatures.length !== 0) {
                     // Included font features
                     cmd.push("--include=" + options.includeFeatures.join(","));
