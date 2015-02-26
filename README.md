@@ -25,7 +25,7 @@ In your project's Gruntfile, add a section named `font_optimizer` to the data ob
 ```js
 grunt.initConfig({
   font_optimizer: {
-    default {
+    default: {
       options: {
         // Characters to include
         chars: '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz',
