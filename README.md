@@ -69,7 +69,7 @@ Default behaviour is to add each font as it's own row to the `option.files`
 ```js
 grunt.initConfig({
   font_optimizer: {
-    default {
+    default: {
       options: {},
       files: {
         'fonts/font-optimized.ttf': ['fonts/font.ttf'],
