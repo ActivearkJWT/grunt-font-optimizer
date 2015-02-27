@@ -99,5 +99,7 @@ grunt.initConfig({
 
 ## Attributions
 
-Uses [Google Font Directory](https://code.google.com/p/googlefontdirectory/) perl script to do the optimization.
-Google Font Directory script licensed under [MIT license](http://www.opensource.org/licenses/mit-license.php).
+Uses [Font Optimizer](https://bitbucket.org/philip/font-optimizer/) perl script
+by Philip Taylor to do the optimization.
+Font Optimizer script licensed under MIT license (found in
+`/lib/font-optimizer/LICENSE`).
